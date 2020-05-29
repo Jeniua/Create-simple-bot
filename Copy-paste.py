@@ -33,11 +33,16 @@ BOT_CONFIG = {
 }
 
 import random
+from nltk.metrics.distance import edit_distance
+
 def get_intent(text):
     intents = BOT_CONFIG['intents']
     for intent,value in intents.items():
         for example in value['questions']:
-            if text == example:
+            dist = edit_distance(text.lower(),example.(lower))
+            l = len(example)
+            similarity = 1 - dist/l
+            if similarity > 0.6:
                 return intent
 
 def get_response_by_intent(intent):
